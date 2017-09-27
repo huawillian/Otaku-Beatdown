@@ -95,6 +95,10 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 				this.CalledOnLevelWasLoaded(scene.buildIndex);
 			}
 		};
+
+		if (photonView.isMine) {
+			MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
+		}
 	}
 
 	void CalledOnLevelWasLoaded(int level)
@@ -111,6 +115,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 				if (kunaiNum > 0) {
 					photonView.RPC ("throwKunai", PhotonTargets.All, transform.position, transform.forward);
 					kunaiNum--;
+					MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 				}
 			}
 
@@ -118,6 +123,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 				if (shurikenNum > 0) {
 					photonView.RPC ("throwShuriken", PhotonTargets.All, transform.position, transform.forward);
 					shurikenNum--;
+					MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 				}
 			}
 
@@ -125,6 +131,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 				if (bombNum > 0) {
 					photonView.RPC ("throwBomb", PhotonTargets.All, transform.position, transform.forward);
 					bombNum--;
+					MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 				}
 			}
 
@@ -132,6 +139,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 				if (ultimateNum > 0) {
 					photonView.RPC ("spawnFlamethrower", PhotonTargets.All, transform.position, transform.forward);
 					ultimateNum--;
+					MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 				}
 			}
 
@@ -184,8 +192,6 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 1, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
 		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 0.5f, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
 		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 1.5f, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
-
-
 		audioSrc.PlayOneShot (throwSound);
 	}
 
@@ -211,19 +217,12 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 	}
 		
 	IEnumerator deathRoutine() {
-		isDead = true;
-
-		GetComponent<Rigidbody> ().isKinematic = true;
-
-		animator.StopPlayback ();
-		animator.Play ("Death");
-
-		yield return new WaitForSeconds (1f);
-
+		yield return new WaitForSeconds (1.5f);
 		if (photonView.isMine) {
 			MyGameManager.Instance.LeaveRoom();
 		}
 	}
+
 
 	void OnTriggerStay(Collider other) 
 	{
@@ -243,6 +242,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead){
 				photonView.RPC ("down", PhotonTargets.All);
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -274,6 +274,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead){
 				photonView.RPC ("damage", PhotonTargets.All);
 			}
@@ -290,6 +291,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead) {
 				photonView.RPC ("down", PhotonTargets.All);
 				Vector3 dir = transform.forward * -1.0f * knockAwayForce;
@@ -307,6 +309,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead) {
 				photonView.RPC ("down", PhotonTargets.All);
 				Vector3 dir = transform.forward * -1.0f * knockAwayForce;
@@ -322,21 +325,25 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 		if (other.name.Contains ("KunaPowerUp")) {
 			audioSrc.PlayOneShot (health);
 			kunaiNum += 2;
+			MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 		}
 
 		if (other.name.Contains ("ShurikePowerUp")) {
 			audioSrc.PlayOneShot (health);
 			shurikenNum += 1;
+			MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 		}
 
 		if (other.name.Contains ("BombPowerUp")) {
 			audioSrc.PlayOneShot (health);
 			bombNum += 1;
+			MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 		}
 
 		if (other.name.Contains ("UltimatePowerUp")) {
 			audioSrc.PlayOneShot (health);
 			ultimateNum += 1;
+			MyGameManager.Instance.updateUI (kunaiNum, shurikenNum, bombNum, ultimateNum);
 		}
 
 		if (other.name.Contains ("Kunai")) {
@@ -344,8 +351,9 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead){
-				photonView.RPC ("damage", PhotonTargets.All);;
+				photonView.RPC ("damage", PhotonTargets.All);
 			}
 		}
 
@@ -354,6 +362,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead){
 				photonView.RPC ("down", PhotonTargets.All);
 				Vector3 dir = transform.forward * -1.0f * knockAwayForce * 0.3f;
@@ -366,6 +375,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
+				StartCoroutine ("deathRoutine");
 			} else if (!isDead){
 				photonView.RPC ("down", PhotonTargets.All);
 				mvScript.AddForce (new Vector3(0, knockUpForce * 2.0f, 0));
@@ -397,7 +407,10 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 	[PunRPC]
 	void death() {
-		StartCoroutine ("deathRoutine");
+		isDead = true;
+		GetComponent<Rigidbody> ().isKinematic = true;
+		animator.StopPlayback ();
+		animator.Play ("Death");
 	}
 
 	[PunRPC]

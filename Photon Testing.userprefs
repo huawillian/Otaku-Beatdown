@@ -2,14 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TaichiPlayerManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\MyPlayerNameInputField.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MyGameManager.cs" Line="16" Column="28" />
+      <File FileName="Assets\Scripts\MyGameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TaichiPlayerManager.cs" Line="218" Column="3" />
       <File FileName="Assets\Scripts\MyLauncher.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TaichiPlayerManager.cs" Line="335" Column="15" />
-      <File FileName="Assets\Scripts\TimeToLive.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerMovementMouse.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerAnimatorMouse.cs" Line="1" Column="1" />
-      <File FileName="Assets\UltimateSpawner.cs" Line="19" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

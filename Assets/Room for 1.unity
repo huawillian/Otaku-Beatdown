@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 2
+    m_MixedBakeMode: 0
     m_BakeBackend: 0
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -245,7 +245,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -595,11 +595,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 507597421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265856906cd1d064aa08553cf4a806c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ultimatePrefab: {fileID: 0}
-  ultimate: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: UltimatePowerUp
+  spawnCooldown: 45
 --- !u!4 &507597423
 Transform:
   m_ObjectHideFlags: 0
@@ -637,11 +638,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 514668447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6351c730a9ba2564a90fd932d63f8f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kunaiPrefab: {fileID: 0}
-  kunai: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: KunaPowerUp
+  spawnCooldown: 30
 --- !u!4 &514668449
 Transform:
   m_ObjectHideFlags: 0
@@ -679,11 +681,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 684022782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6351c730a9ba2564a90fd932d63f8f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kunaiPrefab: {fileID: 0}
-  kunai: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: KunaPowerUp
+  spawnCooldown: 30
 --- !u!4 &684022784
 Transform:
   m_ObjectHideFlags: 0
@@ -721,12 +724,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 695843003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5efa7aff34360954d9aee43be48f950a, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPrefab: {fileID: 1687271030858218, guid: 68f8276c862e2c04e8573fe670235665,
-    type: 2}
-  health: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: Health
+  spawnCooldown: 60
 --- !u!4 &695843005
 Transform:
   m_ObjectHideFlags: 0
@@ -764,11 +767,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 703159598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b9d87e406d5994aa93c9928ddcb8b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 1949886455385950, guid: d2ab50aa01deaac49a64b619a7dba3a6, type: 2}
-  bomb: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: BombPowerUp
+  spawnCooldown: 45
 --- !u!4 &703159600
 Transform:
   m_ObjectHideFlags: 0
@@ -1223,11 +1227,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1037700000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9e3dd633dc38e418daae06edca3820, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shurikenPrefab: {fileID: 0}
-  shuriken: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: ShurikePowerUp
+  spawnCooldown: 45
 --- !u!4 &1037700002
 Transform:
   m_ObjectHideFlags: 0
@@ -1517,11 +1522,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405327159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265856906cd1d064aa08553cf4a806c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ultimatePrefab: {fileID: 0}
-  ultimate: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: UltimatePowerUp
+  spawnCooldown: 45
 --- !u!4 &1405327161
 Transform:
   m_ObjectHideFlags: 0
@@ -1820,11 +1826,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660233667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9e3dd633dc38e418daae06edca3820, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shurikenPrefab: {fileID: 0}
-  shuriken: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: ShurikePowerUp
+  spawnCooldown: 45
 --- !u!4 &1660233669
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,11 +1869,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670695878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6351c730a9ba2564a90fd932d63f8f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kunaiPrefab: {fileID: 0}
-  kunai: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: KunaPowerUp
+  spawnCooldown: 30
 --- !u!4 &1670695880
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,11 +1917,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796630362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b9d87e406d5994aa93c9928ddcb8b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 79319e31ee2e98a47b07494344db86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 1949886455385950, guid: d2ab50aa01deaac49a64b619a7dba3a6, type: 2}
-  bomb: {fileID: 0}
+  powerup: {fileID: 0}
+  powerupresourse: BombPowerUp
+  spawnCooldown: 45
 --- !u!4 &1796630364
 Transform:
   m_ObjectHideFlags: 0
