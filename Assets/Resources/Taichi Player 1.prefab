@@ -4565,9 +4565,10 @@ MonoBehaviour:
   shurikenPrefab: {fileID: 1893033703500342, guid: 758f21c110e7da74c91d52fde2b9a271,
     type: 2}
   bombPrefab: {fileID: 1972583095813394, guid: 03b4e3951e45fd34481091cec94a7a9a, type: 2}
-  kunaiNum: 5
+  kunaiNum: 3
   shurikenNum: 1
   bombNum: 1
+  ultimateNum: 1
   flamethrowerPrefab: {fileID: 1000012118400646, guid: 3123da49cb81147489b444f2749aba47,
     type: 2}
   hitByFlame: 0

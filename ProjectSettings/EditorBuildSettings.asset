@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Room for 1.unity
     guid: 13343c9a26e0b5945840740b1551b07f
   - enabled: 0
-    path: Assets/Room for 2.unity
+    path: 
     guid: b03854978505efe4aa5bf8c292c01914
   - enabled: 0
-    path: Assets/Room for 3.unity
+    path: 
     guid: 56c4a38db71fd134fb57f53a20e667b6
   - enabled: 0
-    path: Assets/Room for 4.unity
+    path: 
     guid: 4f68d403df7067144ac9f279e9a209a7
   - enabled: 0
     path: Assets/Photon Unity Networking/Demos/DemoHub/DemoHub-Scene-V2.unity

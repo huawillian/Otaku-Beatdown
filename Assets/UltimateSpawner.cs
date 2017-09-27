@@ -29,7 +29,7 @@ public class UltimateSpawner : Photon.PunBehaviour {
 			}
 		}
 
-		StartCoroutine ("SpawnKunaiCoroutine");
+		StartCoroutine ("SpawnUltimateCoroutine");
 	}
 
 

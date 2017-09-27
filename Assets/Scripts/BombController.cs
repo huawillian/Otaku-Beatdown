@@ -17,7 +17,7 @@ public class BombController : MonoBehaviour {
 	}
 
 	IEnumerator explosionCoroutine() {
-		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (1.3f);
 		GameObject.Instantiate (explosion, transform.position, Quaternion.identity);
 		GameObject.Destroy (this.gameObject);
 	}

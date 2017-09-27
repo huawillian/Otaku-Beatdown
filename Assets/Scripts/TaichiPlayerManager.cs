@@ -181,14 +181,18 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 	[PunRPC]
 	void throwKunai(Vector3 start, Vector3 dir) {
 		animator.Play ("Throw");
-		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 1, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0) );
+		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 1, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
+		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 0.5f, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
+		Instantiate (kunaiPrefab, start + dir + new Vector3 (0, 1.5f, 0), transform.rotation * Quaternion.Euler(0, Random.Range(-12f, 12f),0));
+
+
 		audioSrc.PlayOneShot (throwSound);
 	}
 
 	[PunRPC]
 	void throwShuriken(Vector3 start, Vector3 dir) {
 		animator.Play ("Throw");
-		Instantiate (shurikenPrefab, start + dir * 1.8f + new Vector3(0, 1, 0), transform.rotation);
+		Instantiate (shurikenPrefab, start + dir * 2.2f + new Vector3(0, 1, 0), transform.rotation);
 		audioSrc.PlayOneShot (throwSound);
 	}
 
@@ -232,7 +236,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 			if (hitByFlame)
 				return;
 			
-			Health -= 0.02f;
+			Health -= 0.015f;
 			hitByFlame = true;
 			StartCoroutine ("FlameTriggerReset");
 
@@ -282,7 +286,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 			hasBeenPunched = true;
 			StartCoroutine ("punchreset");
 
-			Health -= 0.25f;
+			Health -= 0.35f;
 
 			if (Health <= 0f && photonView.isMine && !isDead) {
 				photonView.RPC ("death", PhotonTargets.All);
@@ -317,7 +321,7 @@ public class TaichiPlayerManager : Photon.PunBehaviour, IPunObservable
 
 		if (other.name.Contains ("KunaPowerUp")) {
 			audioSrc.PlayOneShot (health);
-			kunaiNum += 3;
+			kunaiNum += 2;
 		}
 
 		if (other.name.Contains ("ShurikePowerUp")) {
